@@ -1,10 +1,19 @@
+
 ## AI工作猎手
 <br/>
 
 - **`找工作，用AI工作猎手！让AI帮您找工作！`** AI坐席：【DeepSeek+ChatGpt】赋能，ai助理作为您的求职者分身24小时 * 7在线找工作，并结合您的简历信息定制化回复。批量投递，自动发送简历，交换联系方式。hr拒绝挽留。高意向邮件通知，让您不错过每一份工作机会。
-<br/>
+  <br/>
 ---
-<br/>
+
+## 安装使用
+- [greasyfork搜索:(AI工作猎手)](https://greasyfork.org/zh-CN/scripts/527733)
+- 或者下载项目中的`ai-job-hunting.user.js`文件，通过油猴本地脚本导入。
+- 或者打开浏览器输入地址油猴自动安装：[https://gitee.com/yangfeng20/ai-job/raw/master/ai-job-hunting.user.js](https://gitee.com/yangfeng20/ai-job/raw/master/ai-job-hunting.user.js)
+- 记得打开浏览器的开发者模式，新版本油猴需要打开开发者模式才能运行脚本。
+- Boss首页没有功能面板，要在工作列表页面才有功能面板：[https://www.zhipin.com/web/geek/job](https://www.zhipin.com/web/geek/job)
+
+## 功能介绍
 
 ### AI坐席
 - \- 让AI作为您的求职者分身，帮助您快速找到工作。
@@ -39,6 +48,10 @@
 - \- 可在偏好设置中设置预设问题，ai坐席根据场景智能匹配您的预设问题，进行智能回答。
 
 <br/>
+
+### 视频教程
+- \- 点击下方链接观看视频教程。
+- \- <a href="https://www.bilibili.com/video/BV1HKAyebESp" target="_blank">AI工作猎手使用教程</a>
 
 ### 常见问题
 - \- 在boss更新简历之后，请重新导入简历。
