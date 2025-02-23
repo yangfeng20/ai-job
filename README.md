@@ -13,6 +13,10 @@
 - 记得打开浏览器的开发者模式，新版本油猴需要打开开发者模式才能运行脚本。
 - Boss首页没有功能面板，要在工作列表页面才有功能面板：[https://www.zhipin.com/web/geek/job](https://www.zhipin.com/web/geek/job)
 
+### 视频教程
+- \- 点击下方链接观看视频教程。
+- \- <a href="https://www.bilibili.com/video/BV1HKAyebESp" target="_blank">AI工作猎手使用教程</a>
+
 ## 功能介绍
 
 ### AI坐席
@@ -49,9 +53,6 @@
 
 <br/>
 
-### 视频教程
-- \- 点击下方链接观看视频教程。
-- \- <a href="https://www.bilibili.com/video/BV1HKAyebESp" target="_blank">AI工作猎手使用教程</a>
 
 ### 常见问题
 - \- 在boss更新简历之后，请重新导入简历。
