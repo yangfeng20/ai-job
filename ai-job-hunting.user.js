@@ -6,6 +6,8 @@
 // @description  找工作，用AI工作猎手！让AI帮您找工作！ai坐席：【DeepSeek+ChatGpt】赋能，ai助理作为您的求职者分身24小时 * 7在线找工作，并结合您的简历信息定制化回复。批量投递，自动发送简历，交换联系方式。hr拒绝挽留。高意向邮件通知，让您不错过每一份工作机会。BOSS直聘
 // @license      Apache License 2.0
 // @icon         https://gitee.com/yangfeng20/ai-job/raw/master/file/icon.png
+// @downloadURL  https://gitee.com/yangfeng20/ai-job/raw/master/ai-job-hunting.user.js
+// @updateURL    https://gitee.com/yangfeng20/ai-job/raw/master/ai-job-hunting.user.js
 // @match        https://www.zhipin.com/web/geek/*
 // @require      https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.prod.js
 // @require      https://unpkg.com/vue-demi@latest/lib/index.iife.js
