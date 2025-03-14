@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AI工作猎手-让ai帮您找工作！
 // @namespace    https://github.com/yangfeng20
-// @version      0.0.7-beta
+// @version      0.0.8-beta
 // @author       maple.
 // @description  找工作，用AI工作猎手！让AI帮您找工作！ai坐席：【DeepSeek+ChatGpt】赋能，ai助理作为您的求职者分身24小时 * 7在线找工作，并结合您的简历信息定制化回复。批量投递，自动发送简历，交换联系方式。hr拒绝挽留。高意向邮件通知，让您不错过每一份工作机会。BOSS直聘
 // @license      Apache License 2.0
@@ -40,7 +40,7 @@ System.set("user:element-plus", (()=>{const _=ElementPlus;('default' in _)||(_.d
 System.set("user:protobufjs", (()=>{const _=protobuf;('default' in _)||(_.default=_);return _})());
 System.set("user:event-source-polyfill", (()=>{const _=EventSourcePolyfill;('default' in _)||(_.default=_);return _})());
 
-System.register("./__entry.js", ['./__monkey.entry-DCZAb-4v.js'], (function (exports, module) {
+System.register("./__entry.js", ['./__monkey.entry-Ca4ph1Aa.js'], (function (exports, module) {
 	'use strict';
 	return {
 		setters: [null],
@@ -52,7 +52,7 @@ System.register("./__entry.js", ['./__monkey.entry-DCZAb-4v.js'], (function (exp
 	};
 }));
 
-System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
+System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
   'use strict';
   var ref, reactive, createApp, defineComponent, openBlock, createBlock, inject, shallowRef, resolveDynamicComponent, protobuf, defineStore, createPinia, ElMessage$1, ElementPlus;
   return {
@@ -228,8 +228,8 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         }
         // 范围匹配
         static isRangeOverlap(range, input) {
-          const parseRange = (str) => {
-            const match = str.match(/(\d+)(?:\s*-\s*(\d+))?/);
+          const parseRange = (str2) => {
+            const match = str2.match(/(\d+)(?:\s*-\s*(\d+))?/);
             if (!match) {
               throw new Error("Invalid range format");
             }
@@ -506,8 +506,8 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
       const { toString } = Object.prototype;
       const { getPrototypeOf } = Object;
       const kindOf = /* @__PURE__ */ ((cache) => (thing) => {
-        const str = toString.call(thing);
-        return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
+        const str2 = toString.call(thing);
+        return cache[str2] || (cache[str2] = str2.slice(8, -1).toLowerCase());
       })(/* @__PURE__ */ Object.create(null));
       const kindOfTest = (type) => {
         type = type.toLowerCase();
@@ -552,7 +552,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         kind === "object" && isFunction(thing.toString) && thing.toString() === "[object FormData]"));
       };
       const isURLSearchParams = kindOfTest("URLSearchParams");
-      const trim = (str) => str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+      const trim = (str2) => str2.trim ? str2.trim() : str2.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
       function forEach(obj, fn, { allOwnKeys = false } = {}) {
         if (obj === null || typeof obj === "undefined") {
           return;
@@ -661,13 +661,13 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         } while (sourceObj && (!filter2 || filter2(sourceObj, destObj)) && sourceObj !== Object.prototype);
         return destObj;
       };
-      const endsWith = (str, searchString, position) => {
-        str = String(str);
-        if (position === void 0 || position > str.length) {
-          position = str.length;
+      const endsWith = (str2, searchString, position) => {
+        str2 = String(str2);
+        if (position === void 0 || position > str2.length) {
+          position = str2.length;
         }
         position -= searchString.length;
-        const lastIndex = str.indexOf(searchString, position);
+        const lastIndex = str2.indexOf(searchString, position);
         return lastIndex !== -1 && lastIndex === position;
       };
       const toArray = (thing) => {
@@ -698,17 +698,17 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
           fn.call(obj, pair[0], pair[1]);
         }
       };
-      const matchAll = (regExp, str) => {
+      const matchAll = (regExp, str2) => {
         let matches;
         const arr = [];
-        while ((matches = regExp.exec(str)) !== null) {
+        while ((matches = regExp.exec(str2)) !== null) {
           arr.push(matches);
         }
         return arr;
       };
       const isHTMLForm = kindOfTest("HTMLFormElement");
-      const toCamelCase = (str) => {
-        return str.toLowerCase().replace(
+      const toCamelCase = (str2) => {
+        return str2.toLowerCase().replace(
           /[-_\s]([a-z\d])(\w*)/g,
           function replacer(m, p1, p2) {
             return p1.toUpperCase() + p2;
@@ -772,12 +772,12 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
       };
       const generateString = (size = 16, alphabet = ALPHABET.ALPHA_DIGIT) => {
-        let str = "";
+        let str2 = "";
         const { length } = alphabet;
         while (size--) {
-          str += alphabet[Math.random() * length | 0];
+          str2 += alphabet[Math.random() * length | 0];
         }
-        return str;
+        return str2;
       };
       function isSpecCompliantForm(thing) {
         return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
@@ -860,7 +860,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         isAsyncFn,
         isThenable
       };
-      function AxiosError(message, code, config, request2, response) {
+      function AxiosError(message, code2, config, request2, response) {
         Error.call(this);
         if (Error.captureStackTrace) {
           Error.captureStackTrace(this, this.constructor);
@@ -869,7 +869,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         }
         this.message = message;
         this.name = "AxiosError";
-        code && (this.code = code);
+        code2 && (this.code = code2);
         config && (this.config = config);
         request2 && (this.request = request2);
         response && (this.response = response);
@@ -911,19 +911,19 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         "ERR_NOT_SUPPORT",
         "ERR_INVALID_URL"
         // eslint-disable-next-line func-names
-      ].forEach((code) => {
-        descriptors[code] = { value: code };
+      ].forEach((code2) => {
+        descriptors[code2] = { value: code2 };
       });
       Object.defineProperties(AxiosError, descriptors);
       Object.defineProperty(prototype$1, "isAxiosError", { value: true });
-      AxiosError.from = (error, code, config, request2, response, customProps) => {
+      AxiosError.from = (error, code2, config, request2, response, customProps) => {
         const axiosError = Object.create(prototype$1);
         utils$1.toFlatObject(error, axiosError, function filter2(obj) {
           return obj !== Error.prototype;
         }, (prop) => {
           return prop !== "isAxiosError";
         });
-        AxiosError.call(axiosError, error.message, code, config, request2, response);
+        AxiosError.call(axiosError, error.message, code2, config, request2, response);
         axiosError.cause = error;
         axiosError.name = error.name;
         customProps && Object.assign(axiosError, customProps);
@@ -1042,7 +1042,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         build(obj);
         return formData;
       }
-      function encode$1(str) {
+      function encode$1(str2) {
         const charMap = {
           "!": "%21",
           "'": "%27",
@@ -1052,7 +1052,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
           "%20": "+",
           "%00": "\0"
         };
-        return encodeURIComponent(str).replace(/[!'()~]|%20|%00/g, function replacer(match) {
+        return encodeURIComponent(str2).replace(/[!'()~]|%20|%00/g, function replacer(match) {
           return charMap[match];
         });
       }
@@ -1411,16 +1411,16 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         }
         return utils$1.isArray(value) ? value.map(normalizeValue) : String(value);
       }
-      function parseTokens(str) {
+      function parseTokens(str2) {
         const tokens = /* @__PURE__ */ Object.create(null);
         const tokensRE = /([^\s,;=]+)\s*(?:=\s*([^,;]+))?/g;
         let match;
-        while (match = tokensRE.exec(str)) {
+        while (match = tokensRE.exec(str2)) {
           tokens[match[1]] = match[2];
         }
         return tokens;
       }
-      const isValidHeaderName = (str) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(str.trim());
+      const isValidHeaderName = (str2) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(str2.trim());
       function matchHeaderValue(context, value, header, filter2, isHeaderNameFilter) {
         if (utils$1.isFunction(filter2)) {
           return filter2.call(this, value, header);
@@ -1438,8 +1438,8 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         }
       }
       function formatHeader(header) {
-        return header.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (w, char, str) => {
-          return char.toUpperCase() + str;
+        return header.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (w, char, str2) => {
+          return char.toUpperCase() + str2;
         });
       }
       function buildAccessors(obj, header) {
@@ -3135,11 +3135,11 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         }
         async getRenderComponent() {
           if (this.curUrl.includes("www.zhipin.com/web/geek/chat")) {
-            let promise = __vitePreload(() => module.import('./BossMessage-U0h81XE8-BtSOsaTn.js'), void 0 );
+            let promise = __vitePreload(() => module.import('./BossMessage-Di7vIFfl-CoSXCAVS.js'), void 0 );
             return promise.then((item) => item.default);
           }
           if (this.curUrl.includes("www.zhipin.com/web/geek/job")) {
-            let promise = __vitePreload(() => module.import('./BossJobList-bQ1sW61o-DQY-N83A.js'), void 0 );
+            let promise = __vitePreload(() => module.import('./BossJobList-BEaFNNqn-CPEjjk-D.js'), void 0 );
             return promise.then((item) => item.default);
           }
         }
@@ -3381,7 +3381,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
           return 1;
         }
         getRenderComponent() {
-          let promise = __vitePreload(() => module.import('./BossJobList-bQ1sW61o-DQY-N83A.js'), void 0 );
+          let promise = __vitePreload(() => module.import('./BossJobList-BEaFNNqn-CPEjjk-D.js'), void 0 );
           return promise.then((item) => item.default);
         }
         hasNext() {
@@ -3489,8 +3489,8 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         } while (x > 0);
         return output;
       }
-      function encodeUTF8String(str, encoder) {
-        const bytes = encoder.encode(str);
+      function encodeUTF8String(str2, encoder) {
+        const bytes = encoder.encode(str2);
         return [bytes.length >> 8, bytes.length & 255, ...bytes];
       }
       function decodeUTF8String(buffer, startIndex, utf8Decoder) {
@@ -3949,6 +3949,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
       let sendInterceptor = null;
       let receiveInterceptor = null;
       let hookSuccess = false;
+      let hookMap = /* @__PURE__ */ new Map();
       class WebSocketProxy extends originalWebSocket {
         constructor(url, protocols) {
           super(url, protocols);
@@ -3956,6 +3957,12 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
           if (!shouldHook) {
             return this;
           }
+          if (hookMap.has(shouldHook)) {
+            logger$1.info("重复Hook WebSocket:", url);
+            hookSuccess = true;
+            return;
+          }
+          hookMap.set(shouldHook, this);
           logger$1.info("Hook WebSocket:", url);
           logRecorder.info("WS Hook成功");
           hookSuccess = true;
@@ -3986,7 +3993,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
         }
       }
       Tools.window.WebSocket = WebSocketProxy;
-      if (Tools.window.ChatWebsocket) {
+      function wsReConnection() {
         setTimeout(() => {
           if (!hookSuccess) {
             logger$1.info("重连Hook WS");
@@ -4001,7 +4008,16 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
               logger$1.error("重连Hook WS失败", e);
             }
           }
-        }, 1e3);
+        }, 2e3);
+      }
+      if (Tools.window.ChatWebsocket) {
+        wsReConnection();
+      } else {
+        setChatWebsocket().then(() => {
+          setTimeout(() => {
+            Tools.window.ChatWebsocket.init();
+          }, 1e3);
+        });
       }
       function setSendInterceptor(interceptor) {
         sendInterceptor = interceptor;
@@ -4075,6 +4091,18 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
           return true;
         }
         return (_d = (_c = wsData.messages[0]) == null ? void 0 : _c.body) == null ? void 0 : _d.image;
+      }
+      async function setChatWebsocket() {
+        return fetch("https://static.zhipin.com/assets/zhipin/geek/socket.js?v=20250313").then((res) => res.text()).then((code) => {
+          let str = '\nTools.window.ChatWebsocket = ChatWebsocket;\nconsole.log("set ChatWebsocket 成功", ChatWebsocket);\n})();\n';
+          let startIdx = code.lastIndexOf("\n})();\n");
+          let modifiedCode = code.slice(0, startIdx) + str;
+          eval(modifiedCode);
+          logger$1.info("window 挂载 ChatWebsocket", Tools.window.ChatWebsocket);
+          return Promise.resolve();
+        }).catch((err) => {
+          logger$1.info("window 挂载 ChatWebsocket 失败", err);
+        });
       }
       var zhCn = {
         name: "zh-cn",
@@ -4245,7 +4273,7 @@ System.register("./__monkey.entry-DCZAb-4v.js", ['vue', 'protobufjs', 'pinia', '
   };
 }));
 
-System.register("./BossMessage-U0h81XE8-BtSOsaTn.js", ['./el-button-BjSbSE-J-CBPRPyOw.js', 'vue', './__monkey.entry-DCZAb-4v.js', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
+System.register("./BossMessage-Di7vIFfl-CoSXCAVS.js", ['./el-button-BjSbSE-J-CBPRPyOw.js', 'vue', './__monkey.entry-Ca4ph1Aa.js', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
   'use strict';
   var ElButton, defineComponent, openBlock, createElementBlock, Fragment, createVNode, withCtx, createTextVNode, createElementVNode, ElMessage, BossOption, AiPower;
   return {
@@ -4313,7 +4341,7 @@ System.register("./BossMessage-U0h81XE8-BtSOsaTn.js", ['./el-button-BjSbSE-J-CBP
   };
 }));
 
-System.register("./BossJobList-bQ1sW61o-DQY-N83A.js", ['vue', './el-button-BjSbSE-J-CBPRPyOw.js', './__monkey.entry-DCZAb-4v.js', 'event-source-polyfill', 'element-plus', 'protobufjs', 'pinia'], (function (exports, module) {
+System.register("./BossJobList-BEaFNNqn-CPEjjk-D.js", ['vue', './el-button-BjSbSE-J-CBPRPyOw.js', './__monkey.entry-Ca4ph1Aa.js', 'event-source-polyfill', 'element-plus', 'protobufjs', 'pinia'], (function (exports, module) {
   'use strict';
   var ref, defineComponent, computed$1, watch, provide, reactive, toRefs, openBlock, createElementBlock, normalizeClass, unref, renderSlot, inject, onMounted, onBeforeUnmount, onUpdated, createVNode, Fragment, useSlots, withCtx, createBlock, resolveDynamicComponent, normalizeStyle, createTextVNode, toDisplayString, createCommentVNode, createElementVNode, TransitionGroup, useAttrs$1, shallowRef, nextTick, toRef, mergeProps, withModifiers, withDirectives, cloneVNode, Text$1, Comment, Teleport, Transition, vShow, readonly, onDeactivated, isRef, vModelCheckbox, toHandlers, h$1, createSlots, markRaw, effectScope, renderList, withKeys, getCurrentInstance, watchEffect, onUnmounted, onBeforeMount, isVNode, toRaw$1, onScopeDispose, resolveComponent, resolveDirective, vModelText, render, pushScopeId, popScopeId, createStaticVNode, isSymbol$1, buildProp, buildProps, definePropType, useFormSize, useNamespace, formContextKey, formItemContextKey, useId, refDebounced, addUnit, isBoolean, isString, withInstall, withNoopInstall, useFormItem, useFormItemInputId, useFormDisabled, ValidateComponentsMap, view_default, hide_default, isNil, ElIcon, NOOP, circle_close_default, isObject$1, isElement, useSizeProp, isArray$1, clock_default, calendar_default, isClient, close_default, isNumber, useDeprecated, full_screen_default, scale_to_original_default, arrow_left_default, arrow_right_default, zoom_out_default, zoom_in_default, refresh_left_default, refresh_right_default, isUndefined$1, arrow_down_default, minus_default, arrow_up_default, plus_default, iconPropType, d_arrow_left_default, more_filled_default, d_arrow_right_default, warning_filled_default, circle_check_default, check_default, isFunction$1, loading_default, addClass, removeClass, document_default, delete_default, resolveUnref, isString$1, noop$1, tryOnScopeDispose, isIOS, identity$1, fromPairs, useGetDerivedNamespace, useIdInjection, useGlobalConfig, componentSizes, _export_sfc$1, isEmpty, isPropAbsent, CloseComponents, hasClass, useTimeoutFn, more_default, toRawType, isPromise, hasOwn, isPlainObject$1, tryOnMounted, getStyle, isDate, defaultNamespace, useThrottleFn, TinyColor, isFunction$1$1, isDef, hasChanged, ElButton, PushStatus, LoginStore, pushResultCount, UserStore, logger$1, silentlyLogin, isProdEnv, Tools, LogRecorder, loginInterceptor, ElMessage, axios, fetchWithGM_request, EventSourcePolyfill, ElNotification;
   return {
