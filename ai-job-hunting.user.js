@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AI工作猎手-让ai帮您找工作！
 // @namespace    https://github.com/yangfeng20
-// @version      0.0.8-beta
+// @version      0.0.9-beta
 // @author       maple.
 // @description  找工作，用AI工作猎手！让AI帮您找工作！ai坐席：【DeepSeek+ChatGpt】赋能，ai助理作为您的求职者分身24小时 * 7在线找工作，并结合您的简历信息定制化回复。批量投递，自动发送简历，交换联系方式。hr拒绝挽留。高意向邮件通知，让您不错过每一份工作机会。BOSS直聘
 // @license      Apache License 2.0
@@ -40,7 +40,7 @@ System.set("user:element-plus", (()=>{const _=ElementPlus;('default' in _)||(_.d
 System.set("user:protobufjs", (()=>{const _=protobuf;('default' in _)||(_.default=_);return _})());
 System.set("user:event-source-polyfill", (()=>{const _=EventSourcePolyfill;('default' in _)||(_.default=_);return _})());
 
-System.register("./__entry.js", ['./__monkey.entry-Ca4ph1Aa.js'], (function (exports, module) {
+System.register("./__entry.js", ['./__monkey.entry-DrRnlLId.js'], (function (exports, module) {
 	'use strict';
 	return {
 		setters: [null],
@@ -52,7 +52,7 @@ System.register("./__entry.js", ['./__monkey.entry-Ca4ph1Aa.js'], (function (exp
 	};
 }));
 
-System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
+System.register("./__monkey.entry-DrRnlLId.js", ['vue', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
   'use strict';
   var ref, reactive, createApp, defineComponent, openBlock, createBlock, inject, shallowRef, resolveDynamicComponent, protobuf, defineStore, createPinia, ElMessage$1, ElementPlus;
   return {
@@ -2546,6 +2546,7 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
           image
         }) {
           __publicField(this, "msg");
+          __publicField(this, "msgObj");
           __publicField(this, "hex");
           const r = (/* @__PURE__ */ new Date()).getTime();
           const d = r + 68256432452609;
@@ -2582,6 +2583,7 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
             ],
             type: 1
           };
+          this.msgObj = data.messages[0];
           this.msg = protobufType.encode(data).finish().slice();
           this.hex = [...this.msg].map((b) => b.toString(16).padStart(2, "0")).join("");
         }
@@ -2589,7 +2591,26 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
           return this.msg.buffer.slice(0, this.msg.byteLength);
         }
         send() {
-          Tools.window.ChatWebsocket.send(this);
+          if (Tools.window.ChatWebsocket) {
+            Tools.window.ChatWebsocket.send(this);
+            return;
+          }
+          if (this.msgObj.body.type === 3) {
+            Tools.window.ChatWebsocketImage.send(this);
+            return;
+          }
+          if (Tools.window.EventBus) {
+            Tools.window.EventBus.publish("CHAT_SEND_TEXT", {
+              uid: this.msgObj.to.uid,
+              message: this.msgObj.body.text,
+              encryptUid: this.msgObj.to.name
+            }, () => {
+            }, (e) => {
+              logger$1.error("自定义消息发送失败", e);
+            });
+            return;
+          }
+          logger$1.warn("发送自定义消息失败; boss可能更新了，请反馈");
         }
       }
       class MessageRead {
@@ -3135,11 +3156,11 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
         }
         async getRenderComponent() {
           if (this.curUrl.includes("www.zhipin.com/web/geek/chat")) {
-            let promise = __vitePreload(() => module.import('./BossMessage-Di7vIFfl-CoSXCAVS.js'), void 0 );
+            let promise = __vitePreload(() => module.import('./BossMessage-D11jxvfg-DSZf5W_t.js'), void 0 );
             return promise.then((item) => item.default);
           }
           if (this.curUrl.includes("www.zhipin.com/web/geek/job")) {
-            let promise = __vitePreload(() => module.import('./BossJobList-BEaFNNqn-CPEjjk-D.js'), void 0 );
+            let promise = __vitePreload(() => module.import('./BossJobList-Bt5BJdK3-Dl4Uj8Dd.js'), void 0 );
             return promise.then((item) => item.default);
           }
         }
@@ -3381,7 +3402,7 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
           return 1;
         }
         getRenderComponent() {
-          let promise = __vitePreload(() => module.import('./BossJobList-BEaFNNqn-CPEjjk-D.js'), void 0 );
+          let promise = __vitePreload(() => module.import('./BossJobList-Bt5BJdK3-Dl4Uj8Dd.js'), void 0 );
           return promise.then((item) => item.default);
         }
         hasNext() {
@@ -3622,7 +3643,7 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
           }
           return chatProtocolObj;
         } catch (e) {
-          logger$1.debug("解码失败", mqttDecodeResult, e);
+          logger$1.debug(caller + " 解码失败", mqttDecodeResult, e);
         }
       }
       function getMsgBody(data) {
@@ -4016,7 +4037,7 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
         setChatWebsocket().then(() => {
           setTimeout(() => {
             Tools.window.ChatWebsocket.init();
-          }, 1e3);
+          }, 2e3);
         });
       }
       function setSendInterceptor(interceptor) {
@@ -4094,11 +4115,11 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
       }
       async function setChatWebsocket() {
         return fetch("https://static.zhipin.com/assets/zhipin/geek/socket.js?v=20250313").then((res) => res.text()).then((code) => {
-          let str = '\nTools.window.ChatWebsocket = ChatWebsocket;\nconsole.log("set ChatWebsocket 成功", ChatWebsocket);\n})();\n';
-          let startIdx = code.lastIndexOf("\n})();\n");
-          let modifiedCode = code.slice(0, startIdx) + str;
+          let str = '\nTools.window.ChatWebsocketImage = ChatWebsocket;\nconsole.log("set ChatWebsocket 成功", ChatWebsocket)\n';
+          code.lastIndexOf("\n})();\n");
+          let modifiedCode = code.replaceAll(/if \(\"EventBus\" in window\) \{\s+EventBus.subscribe\("CHAT_SEND_TEXT".*fail\);\s+}\);\s+}/gs, str);
           eval(modifiedCode);
-          logger$1.info("window 挂载 ChatWebsocket", Tools.window.ChatWebsocket);
+          logger$1.info("window 挂载 ChatWebsocket", Tools.window.ChatWebsocketImage);
           return Promise.resolve();
         }).catch((err) => {
           logger$1.info("window 挂载 ChatWebsocket 失败", err);
@@ -4273,7 +4294,7 @@ System.register("./__monkey.entry-Ca4ph1Aa.js", ['vue', 'protobufjs', 'pinia', '
   };
 }));
 
-System.register("./BossMessage-Di7vIFfl-CoSXCAVS.js", ['./el-button-BjSbSE-J-CBPRPyOw.js', 'vue', './__monkey.entry-Ca4ph1Aa.js', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
+System.register("./BossMessage-D11jxvfg-DSZf5W_t.js", ['./el-button-BjSbSE-J-CBPRPyOw.js', 'vue', './__monkey.entry-DrRnlLId.js', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
   'use strict';
   var ElButton, defineComponent, openBlock, createElementBlock, Fragment, createVNode, withCtx, createTextVNode, createElementVNode, ElMessage, BossOption, AiPower;
   return {
@@ -4341,7 +4362,7 @@ System.register("./BossMessage-Di7vIFfl-CoSXCAVS.js", ['./el-button-BjSbSE-J-CBP
   };
 }));
 
-System.register("./BossJobList-BEaFNNqn-CPEjjk-D.js", ['vue', './el-button-BjSbSE-J-CBPRPyOw.js', './__monkey.entry-Ca4ph1Aa.js', 'event-source-polyfill', 'element-plus', 'protobufjs', 'pinia'], (function (exports, module) {
+System.register("./BossJobList-Bt5BJdK3-Dl4Uj8Dd.js", ['vue', './el-button-BjSbSE-J-CBPRPyOw.js', './__monkey.entry-DrRnlLId.js', 'event-source-polyfill', 'element-plus', 'protobufjs', 'pinia'], (function (exports, module) {
   'use strict';
   var ref, defineComponent, computed$1, watch, provide, reactive, toRefs, openBlock, createElementBlock, normalizeClass, unref, renderSlot, inject, onMounted, onBeforeUnmount, onUpdated, createVNode, Fragment, useSlots, withCtx, createBlock, resolveDynamicComponent, normalizeStyle, createTextVNode, toDisplayString, createCommentVNode, createElementVNode, TransitionGroup, useAttrs$1, shallowRef, nextTick, toRef, mergeProps, withModifiers, withDirectives, cloneVNode, Text$1, Comment, Teleport, Transition, vShow, readonly, onDeactivated, isRef, vModelCheckbox, toHandlers, h$1, createSlots, markRaw, effectScope, renderList, withKeys, getCurrentInstance, watchEffect, onUnmounted, onBeforeMount, isVNode, toRaw$1, onScopeDispose, resolveComponent, resolveDirective, vModelText, render, pushScopeId, popScopeId, createStaticVNode, isSymbol$1, buildProp, buildProps, definePropType, useFormSize, useNamespace, formContextKey, formItemContextKey, useId, refDebounced, addUnit, isBoolean, isString, withInstall, withNoopInstall, useFormItem, useFormItemInputId, useFormDisabled, ValidateComponentsMap, view_default, hide_default, isNil, ElIcon, NOOP, circle_close_default, isObject$1, isElement, useSizeProp, isArray$1, clock_default, calendar_default, isClient, close_default, isNumber, useDeprecated, full_screen_default, scale_to_original_default, arrow_left_default, arrow_right_default, zoom_out_default, zoom_in_default, refresh_left_default, refresh_right_default, isUndefined$1, arrow_down_default, minus_default, arrow_up_default, plus_default, iconPropType, d_arrow_left_default, more_filled_default, d_arrow_right_default, warning_filled_default, circle_check_default, check_default, isFunction$1, loading_default, addClass, removeClass, document_default, delete_default, resolveUnref, isString$1, noop$1, tryOnScopeDispose, isIOS, identity$1, fromPairs, useGetDerivedNamespace, useIdInjection, useGlobalConfig, componentSizes, _export_sfc$1, isEmpty, isPropAbsent, CloseComponents, hasClass, useTimeoutFn, more_default, toRawType, isPromise, hasOwn, isPlainObject$1, tryOnMounted, getStyle, isDate, defaultNamespace, useThrottleFn, TinyColor, isFunction$1$1, isDef, hasChanged, ElButton, PushStatus, LoginStore, pushResultCount, UserStore, logger$1, silentlyLogin, isProdEnv, Tools, LogRecorder, loginInterceptor, ElMessage, axios, fetchWithGM_request, EventSourcePolyfill, ElNotification;
   return {
@@ -28745,7 +28766,7 @@ System.register("./BossJobList-BEaFNNqn-CPEjjk-D.js", ['vue', './el-button-BjSbS
       });
       const RunRecord = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-fc9f5b4e"]]);
       const _hoisted_1$2 = { class: "markdown-body" };
-      const _hoisted_2 = /* @__PURE__ */ createStaticVNode('<h2>AI工作猎手</h2><br><ul><li><strong><code class="">找工作，用AI工作猎手！让AI帮您找工作！</code></strong> AI坐席：【DeepSeek+ChatGpt】赋能，ai助理作为您的求职者分身24小时 * 7在线找工作，并结合您的简历信息定制化回复。批量投递，自动发送简历，交换联系方式。hr拒绝挽留。高意向邮件通知，让您不错过每一份工作机会。 <br></li></ul><hr><br><h3>AI坐席</h3><ul><li>- 让AI作为您的求职者分身，帮助您快速找到工作。</li><li>- 智能回复HR的消息,结合您的简历信息进行定制化回答。</li><li>- 预设问题支持，根据场景只能匹配您的预设问题，进行智能回答。</li><li>- AI快捷回复发送简历，交换 wx、联系方式。</li><li>- HR拒绝挽留，当hr拒绝您时，可触发拒绝挽留。主动发送简历，并发送自定义的挽留语。</li></ul><br><h3>工作通知</h3><ul><li>- 支持AI坐席与HR的每轮沟通，发送邮件通知。</li><li>- 高意向职位邮件通知，通过设置的关键字或者对话轮数，发送高意向职位的通知。</li></ul><br><h3>投递工具</h3><ul><li>- 批量投递简历。自定义单次投递数量。</li><li>- 发送自定义招呼语，充分展现您的优势。</li><li>- 投递后发送图片简历，绕开发送附件简历需要HR同意机制，直接触达。</li><li>- 自定义筛选过滤，根据您的需求筛选公司，职位，薪资…。</li></ul><br><h3>AI坐席使用</h3><ul><li>- 购买ai坐席之后，可在AI助手中开启全局AI坐席功能。</li><li>- 开启全局AI坐席功能后，HR的消息将会自动转发给AI坐席进行智能回复。</li><li>- 可随时打断AI坐席的回复，当在web端或app端自己回复HR之后，当前会话的AI坐席将会自动停止。</li><li>- 停止后，可在web端的消息列表页面中点击【重启当前会话AI坐席】按钮，重新开启当前会话的AI坐席。</li><li>- 也可在web端通过快捷指令【start】输入到聊天框并发送，开启当前会话的AI坐席。boss端并不会收到当前消息。</li><li>- 当hr拒绝您时，可触发拒绝挽留。主动发送简历，并发送自定义的挽留语。</li><li>- 当hr通过boss向你交换联系方式时，ai助手自动交换。</li><li>- 可在偏好设置中设置预设问题，ai坐席根据场景智能匹配您的预设问题，进行智能回答。</li></ul><br><h3>视频教程</h3><ul><li>- 点击下方链接观看视频教程。</li><li>- <a href="https://www.bilibili.com/video/BV1HKAyebESp" target="_blank">AI工作猎手使用教程</a></li></ul><h3>常见问题</h3><ul><li>- 在boss更新简历之后，请重新导入简历。</li><li>- 脚本未运行，请尝试刷新页面。</li><li>- ai回复需要一定时间，请耐心等待。</li></ul><hr>', 22);
+      const _hoisted_2 = /* @__PURE__ */ createStaticVNode('<h2>AI工作猎手</h2><br><ul><li><strong><code class="">找工作，用AI工作猎手！让AI帮您找工作！</code></strong> AI坐席：【DeepSeek+ChatGpt】赋能，ai助理作为您的求职者分身24小时 * 7在线找工作，并结合您的简历信息定制化回复。批量投递，自动发送简历，交换联系方式。hr拒绝挽留。高意向邮件通知，让您不错过每一份工作机会。 <br></li></ul><hr><br><h3>AI坐席</h3><ul><li>- 让AI作为您的求职者分身，帮助您快速找到工作。</li><li>- 智能回复HR的消息,结合您的简历信息进行定制化回答。</li><li>- 预设问题支持，根据场景只能匹配您的预设问题，进行智能回答。</li><li>- AI快捷回复发送简历，交换 wx、联系方式。</li><li>- HR拒绝挽留，当hr拒绝您时，可触发拒绝挽留。主动发送简历，并发送自定义的挽留语。</li></ul><br><h3>工作通知</h3><ul><li>- 支持AI坐席与HR的每轮沟通，发送邮件通知。</li><li>- 高意向职位邮件通知，通过设置的关键字或者对话轮数，发送高意向职位的通知。</li></ul><br><h3>投递工具</h3><ul><li>- 批量投递简历。自定义单次投递数量。</li><li>- 发送自定义招呼语，充分展现您的优势。</li><li>- 投递后发送图片简历，绕开发送附件简历需要HR同意机制，直接触达。</li><li>- 自定义筛选过滤，根据您的需求筛选公司，职位，薪资…。</li></ul><br><h3>AI坐席使用</h3><ul><li>- 购买ai坐席之后，可在AI助手中开启全局AI坐席功能。</li><li>- 开启全局AI坐席功能后，HR的消息将会自动转发给AI坐席进行智能回复。</li><li>- 可随时打断AI坐席的回复，当在web端或app端自己回复HR之后，当前会话的AI坐席将会自动停止。</li><li>- 停止后，可在web端的消息列表页面中点击【重启当前会话AI坐席】按钮，重新开启当前会话的AI坐席。</li><li>- 也可在web端通过快捷指令【start】输入到聊天框并发送，开启当前会话的AI坐席。boss端并不会收到当前消息。</li><li>- 当hr拒绝您时，可触发拒绝挽留。主动发送简历，并发送自定义的挽留语。</li><li>- 当hr通过boss向你交换联系方式时，ai助手自动交换。</li><li>- 可在偏好设置中设置预设问题，ai坐席根据场景智能匹配您的预设问题，进行智能回答。</li></ul><br><h3>视频教程</h3><ul><li>- 点击下方链接观看视频教程。</li><li>- <a href="https://www.bilibili.com/video/BV1HKAyebESp" target="_blank">AI工作猎手使用教程</a></li></ul><h3>常见问题</h3><ul><li>- 在boss更新简历之后，请重新导入简历。</li><li>- 脚本未运行，请尝试刷新页面。</li><li>- ai回复需要一定时间，请耐心等待。</li><li>- 如果AI坐席重复回复，请关闭多余的web页面，仅保留一个。近期会优化。</li></ul><hr>', 22);
       const _hoisted_24 = [
         _hoisted_2
       ];
