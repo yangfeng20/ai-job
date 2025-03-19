@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AI工作猎手-让ai帮您找工作！
 // @namespace    https://github.com/yangfeng20
-// @version      0.0.10-beta
+// @version      0.0.11-beta
 // @author       maple.
 // @description  找工作，用AI工作猎手！让AI帮您找工作！ai坐席：【DeepSeek+ChatGpt】赋能，ai助理作为您的求职者分身24小时 * 7在线找工作，并结合您的简历信息定制化回复。批量投递，自动发送简历，交换联系方式。hr拒绝挽留。高意向邮件通知，让您不错过每一份工作机会。BOSS直聘
 // @license      Apache License 2.0
@@ -40,7 +40,7 @@ System.set("user:element-plus", (()=>{const _=ElementPlus;('default' in _)||(_.d
 System.set("user:protobufjs", (()=>{const _=protobuf;('default' in _)||(_.default=_);return _})());
 System.set("user:event-source-polyfill", (()=>{const _=EventSourcePolyfill;('default' in _)||(_.default=_);return _})());
 
-System.register("./__entry.js", ['./__monkey.entry-Ds0w-KNh.js'], (function (exports, module) {
+System.register("./__entry.js", ['./__monkey.entry-DNuZHu9J.js'], (function (exports, module) {
 	'use strict';
 	return {
 		setters: [null],
@@ -52,7 +52,7 @@ System.register("./__entry.js", ['./__monkey.entry-Ds0w-KNh.js'], (function (exp
 	};
 }));
 
-System.register("./__monkey.entry-Ds0w-KNh.js", ['vue', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
+System.register("./__monkey.entry-DNuZHu9J.js", ['vue', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
   'use strict';
   var ref, reactive, createApp, defineComponent, openBlock, createBlock, inject, shallowRef, resolveDynamicComponent, protobuf, defineStore, createPinia, ElMessage$1, ElementPlus;
   return {
@@ -2592,11 +2592,19 @@ System.register("./__monkey.entry-Ds0w-KNh.js", ['vue', 'protobufjs', 'pinia', '
         }
         send() {
           if (Tools.window.ChatWebsocket) {
-            Tools.window.ChatWebsocket.send(this);
+            try {
+              Tools.window.ChatWebsocket.send(this);
+            } catch (e) {
+              logger$1.error("发送消息失败", e);
+            }
             return;
           }
           if (this.msgObj.body.type === 3) {
-            Tools.window.ChatWebsocketImage.send(this);
+            try {
+              Tools.window.ChatWebsocketImage.send(this);
+            } catch (e) {
+              logger$1.error("发送图片消息失败", e);
+            }
             return;
           }
           if (Tools.window.EventBus) {
@@ -2607,6 +2615,13 @@ System.register("./__monkey.entry-Ds0w-KNh.js", ['vue', 'protobufjs', 'pinia', '
             }, () => {
             }, (e) => {
               logger$1.error("自定义消息发送失败", e);
+              try {
+                Tools.window.ChatWebsocketImage.send(this);
+              } catch (e2) {
+                logger$1.error("重试发送自定义招呼语失败", e2);
+                return;
+              }
+              logger$1.info("重试发送自定义招呼语成功");
             });
             return;
           }
@@ -3163,11 +3178,11 @@ System.register("./__monkey.entry-Ds0w-KNh.js", ['vue', 'protobufjs', 'pinia', '
         }
         async getRenderComponent() {
           if (this.curUrl.includes("www.zhipin.com/web/geek/chat")) {
-            let promise = __vitePreload(() => module.import('./BossMessage-xCnn6p_B-CwKG17EI.js'), void 0 );
+            let promise = __vitePreload(() => module.import('./BossMessage-DJaMw3_I-BybzK1kn.js'), void 0 );
             return promise.then((item) => item.default);
           }
           if (this.curUrl.includes("www.zhipin.com/web/geek/job")) {
-            let promise = __vitePreload(() => module.import('./BossJobList-Bk15vLJE-Cd1a_9w1.js'), void 0 );
+            let promise = __vitePreload(() => module.import('./BossJobList-1dGSMY7J-k1QA2Ewk.js'), void 0 );
             return promise.then((item) => item.default);
           }
         }
@@ -3254,6 +3269,7 @@ System.register("./__monkey.entry-Ds0w-KNh.js", ['vue', 'protobufjs', 'pinia', '
           let publishUrl = `https://www.zhipin.com/wapi/zpgeek/friend/add.json?securityId=${jobDetail.securityId}&jobId=${jobDetail.encryptJobId}&lid=${jobDetail.lid}`;
           let pushResp = { code: PushResultStatus.NOT_START, message: "" };
           try {
+            await Tools.sleep(300);
             pushResp = await axios.post(publishUrl, null, { headers: { "Zp_token": Tools.getCookieValue("bst") } });
           } catch (error) {
             logger$1.debug(`工作【${jobTitle}】投递失败; 正在等待重试; 原因：${error.message}`);
@@ -3409,7 +3425,7 @@ System.register("./__monkey.entry-Ds0w-KNh.js", ['vue', 'protobufjs', 'pinia', '
           return 1;
         }
         getRenderComponent() {
-          let promise = __vitePreload(() => module.import('./BossJobList-Bk15vLJE-Cd1a_9w1.js'), void 0 );
+          let promise = __vitePreload(() => module.import('./BossJobList-1dGSMY7J-k1QA2Ewk.js'), void 0 );
           return promise.then((item) => item.default);
         }
         hasNext() {
@@ -4304,7 +4320,7 @@ System.register("./__monkey.entry-Ds0w-KNh.js", ['vue', 'protobufjs', 'pinia', '
   };
 }));
 
-System.register("./BossMessage-xCnn6p_B-CwKG17EI.js", ['./el-button-BjSbSE-J-CBPRPyOw.js', 'vue', './__monkey.entry-Ds0w-KNh.js', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
+System.register("./BossMessage-DJaMw3_I-BybzK1kn.js", ['./el-button-BjSbSE-J-CBPRPyOw.js', 'vue', './__monkey.entry-DNuZHu9J.js', 'protobufjs', 'pinia', 'element-plus'], (function (exports, module) {
   'use strict';
   var ElButton, defineComponent, openBlock, createElementBlock, Fragment, createVNode, withCtx, createTextVNode, createElementVNode, ElMessage, BossOption, AiPower;
   return {
@@ -4372,7 +4388,7 @@ System.register("./BossMessage-xCnn6p_B-CwKG17EI.js", ['./el-button-BjSbSE-J-CBP
   };
 }));
 
-System.register("./BossJobList-Bk15vLJE-Cd1a_9w1.js", ['vue', './el-button-BjSbSE-J-CBPRPyOw.js', './__monkey.entry-Ds0w-KNh.js', 'event-source-polyfill', 'element-plus', 'protobufjs', 'pinia'], (function (exports, module) {
+System.register("./BossJobList-1dGSMY7J-k1QA2Ewk.js", ['vue', './el-button-BjSbSE-J-CBPRPyOw.js', './__monkey.entry-DNuZHu9J.js', 'event-source-polyfill', 'element-plus', 'protobufjs', 'pinia'], (function (exports, module) {
   'use strict';
   var ref, defineComponent, computed$1, watch, provide, reactive, toRefs, openBlock, createElementBlock, normalizeClass, unref, renderSlot, inject, onMounted, onBeforeUnmount, onUpdated, createVNode, Fragment, useSlots, withCtx, createBlock, resolveDynamicComponent, normalizeStyle, createTextVNode, toDisplayString, createCommentVNode, createElementVNode, TransitionGroup, useAttrs$1, shallowRef, nextTick, toRef, mergeProps, withModifiers, withDirectives, cloneVNode, Text$1, Comment, Teleport, Transition, vShow, readonly, onDeactivated, isRef, vModelCheckbox, toHandlers, h$1, createSlots, markRaw, effectScope, renderList, withKeys, getCurrentInstance, watchEffect, onUnmounted, onBeforeMount, isVNode, toRaw$1, onScopeDispose, resolveComponent, resolveDirective, vModelText, render, pushScopeId, popScopeId, createStaticVNode, isSymbol$1, buildProp, buildProps, definePropType, useFormSize, useNamespace, formContextKey, formItemContextKey, useId, refDebounced, addUnit, isBoolean, isString, withInstall, withNoopInstall, useFormItem, useFormItemInputId, useFormDisabled, ValidateComponentsMap, view_default, hide_default, isNil, ElIcon, NOOP, circle_close_default, isObject$1, isElement, useSizeProp, isArray$1, clock_default, calendar_default, isClient, close_default, isNumber, useDeprecated, full_screen_default, scale_to_original_default, arrow_left_default, arrow_right_default, zoom_out_default, zoom_in_default, refresh_left_default, refresh_right_default, isUndefined$1, arrow_down_default, minus_default, arrow_up_default, plus_default, iconPropType, d_arrow_left_default, more_filled_default, d_arrow_right_default, warning_filled_default, circle_check_default, check_default, isFunction$1, loading_default, addClass, removeClass, document_default, delete_default, resolveUnref, isString$1, noop$1, tryOnScopeDispose, isIOS, identity$1, fromPairs, useGetDerivedNamespace, useIdInjection, useGlobalConfig, componentSizes, _export_sfc$1, isEmpty, isPropAbsent, CloseComponents, hasClass, useTimeoutFn, more_default, toRawType, isPromise, hasOwn, isPlainObject$1, tryOnMounted, getStyle, isDate, defaultNamespace, useThrottleFn, TinyColor, isFunction$1$1, isDef, hasChanged, ElButton, PushStatus, LoginStore, pushResultCount, UserStore, logger$1, silentlyLogin, isProdEnv, Tools, LogRecorder, loginInterceptor, ElMessage, axios, fetchWithGM_request, EventSourcePolyfill, ElNotification;
   return {
