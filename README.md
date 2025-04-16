@@ -6,6 +6,10 @@
   <br/>
 ---
 
+![示例](/file/ai_seat.png)
+![示例](/file/home.png)
+![示例1](/file/ai_config.png)
+
 
 ### 效果展示
 - \- 点击下方链接观看效果演示。
