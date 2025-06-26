@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AI工作猎手-让ai帮您找工作！
 // @namespace    https://github.com/yangfeng20
-// @version      0.0.18-beta
+// @version      0.0.19-beta
 // @author       maple.
 // @description  找工作，用AI工作猎手！让AI帮您找工作！ai坐席：【DeepSeek+ChatGpt】赋能，ai助理作为您的求职者分身24小时 * 7在线找工作，并结合您的简历信息定制化回复。批量投递，自动发送简历，交换联系方式。hr拒绝挽留。高意向邮件通知，让您不错过每一份工作机会。BOSS直聘
 // @license      Apache License 2.0
@@ -41,7 +41,7 @@ System.set("user:element-plus", (()=>{const _=ElementPlus;('default' in _)||(_.d
 System.set("user:protobufjs", (()=>{const _=protobuf;('default' in _)||(_.default=_);return _})());
 System.set("user:event-source-polyfill", (()=>{const _=EventSourcePolyfill;('default' in _)||(_.default=_);return _})());
 
-System.register("./__entry.js", ['./__monkey.entry-Cm8GOCEH.js'], (function (exports, module) {
+System.register("./__entry.js", ['./__monkey.entry-OFlFOe8Z.js'], (function (exports, module) {
 	'use strict';
 	return {
 		setters: [null],
@@ -53,7 +53,7 @@ System.register("./__entry.js", ['./__monkey.entry-Cm8GOCEH.js'], (function (exp
 	};
 }));
 
-System.register("./__monkey.entry-Cm8GOCEH.js", ['vue', 'protobufjs', 'pinia', 'element-plus', 'event-source-polyfill'], (function (exports, module) {
+System.register("./__monkey.entry-OFlFOe8Z.js", ['vue', 'protobufjs', 'pinia', 'element-plus', 'event-source-polyfill'], (function (exports, module) {
   'use strict';
   var ref, reactive, defineComponent, computed$1, openBlock, createElementBlock, mergeProps, unref, renderSlot, useAttrs$1, useSlots, shallowRef, watch, nextTick, onMounted, toRef, createCommentVNode, Fragment, normalizeClass, createElementVNode, createBlock, withCtx, resolveDynamicComponent, withModifiers, createVNode, toDisplayString, normalizeStyle, provide, onUpdated, inject, onBeforeUnmount, withDirectives, cloneVNode, Text$1, Comment, Teleport, Transition, vShow, readonly, onDeactivated, isRef, vModelCheckbox, createTextVNode, toRefs, h$1, createSlots, markRaw, effectScope, renderList, getCurrentInstance, onUnmounted, onBeforeMount, createApp, warn, watchEffect, getCurrentScope, onScopeDispose, toRaw$1, resolveComponent, resolveDirective, render, isVNode, pushScopeId, popScopeId, protobuf, defineStore, createPinia, ElMessage$1, ElementPlus, ElNotification, EventSourcePolyfillDefault;
   return {
@@ -3452,11 +3452,11 @@ System.register("./__monkey.entry-Cm8GOCEH.js", ['vue', 'protobufjs', 'pinia', '
         }
         async getRenderComponent() {
           if (this.curUrl.includes("www.zhipin.com/web/geek/chat")) {
-            let promise = __vitePreload(() => module.import('./BossMessage-BHOH1YmR-5CYnh3DX.js'), void 0 );
+            let promise = __vitePreload(() => module.import('./BossMessage-B2weFHfO-C8VPLkK_.js'), void 0 );
             return promise.then((item) => item.default);
           }
           if (this.curUrl.includes("www.zhipin.com/web/geek/job") || this.curUrl.includes("overseas")) {
-            let promise = __vitePreload(() => module.import('./BossJobList-BSNDlOO9-CMqeCyZH.js'), void 0 );
+            let promise = __vitePreload(() => module.import('./BossJobList-zyGg4BW6-BYot4VYk.js'), void 0 );
             return promise.then((item) => item.default);
           }
         }
@@ -3585,7 +3585,7 @@ System.register("./__monkey.entry-Cm8GOCEH.js", ['vue', 'protobufjs', 'pinia', '
             throw new NotMatchException(jobTitle, jobContent, "不满足工作内容");
           }
           if (userStore$2.user.preference.afE && userStore$2.user.preference.af) {
-            let filterResp = await AiPower.filter(userStore$2.user.preference.af, JSON.stringify(jobDetail), JSON.stringify(jobDetailExt));
+            let filterResp = await AiPower.filter(userStore$2.user.preference.af, JSON.stringify(this.unpackBaseInfo(jobDetail)), JSON.stringify(this.unpackExtInfo(jobDetailExt)));
             let filterResult = filterResp ? (_a2 = filterResp == null ? void 0 : filterResp.data) == null ? void 0 : _a2.data : null;
             if (filterResult && (filterResult == null ? void 0 : filterResult.filter)) {
               throw new NotMatchException(jobTitle, filterResult.reason, "AI过滤");
@@ -3595,6 +3595,35 @@ System.register("./__monkey.entry-Cm8GOCEH.js", ['vue', 'protobufjs', 'pinia', '
             throw new NotMatchException(jobTitle, jobDetailExt.friendStatus, "已经沟通过");
           }
           return true;
+        }
+        unpackBaseInfo(jobDetail) {
+          return {
+            jobName: jobDetail.jobName,
+            salaryDesc: jobDetail.salaryDesc,
+            jobLabels: jobDetail.jobLabels,
+            skills: jobDetail.skills,
+            jobExperience: jobDetail.jobExperience,
+            daysPerWeekDesc: jobDetail.daysPerWeekDesc,
+            jobDegree: jobDetail.jobDegree,
+            cityName: jobDetail.cityName,
+            areaDistrict: jobDetail.areaDistrict,
+            businessDistrict: jobDetail.businessDistrict,
+            brandName: jobDetail.brandName,
+            brandStageName: jobDetail.brandStageName,
+            brandIndustry: jobDetail.brandIndustry,
+            brandScaleName: jobDetail.brandScaleName,
+            welfareList: jobDetail.welfareList
+          };
+        }
+        unpackExtInfo(jobDetailExt) {
+          return {
+            postDescription: jobDetailExt.postDescription,
+            experienceName: jobDetailExt.experienceName,
+            degreeName: jobDetailExt.degreeName,
+            jobLabels: jobDetailExt.jobLabels,
+            address: jobDetailExt.address,
+            activeTimeDesc: jobDetailExt.activeTimeDesc
+          };
         }
         pausePush() {
           this.pushStatus = PushStatus.PAUSE;
@@ -20357,7 +20386,7 @@ System.register("./__monkey.entry-Cm8GOCEH.js", ['vue', 'protobufjs', 'pinia', '
   };
 }));
 
-System.register("./BossMessage-BHOH1YmR-5CYnh3DX.js", ['./__monkey.entry-Cm8GOCEH.js', 'vue', 'protobufjs', 'pinia', 'element-plus', 'event-source-polyfill'], (function (exports, module) {
+System.register("./BossMessage-B2weFHfO-C8VPLkK_.js", ['./__monkey.entry-OFlFOe8Z.js', 'vue', 'protobufjs', 'pinia', 'element-plus', 'event-source-polyfill'], (function (exports, module) {
   'use strict';
   var ElMessage, BossOption, AiPower, ElButton, defineComponent, openBlock, createElementBlock, Fragment, createVNode, withCtx, createTextVNode, createElementVNode;
   return {
@@ -20424,7 +20453,7 @@ System.register("./BossMessage-BHOH1YmR-5CYnh3DX.js", ['./__monkey.entry-Cm8GOCE
   };
 }));
 
-System.register("./BossJobList-BSNDlOO9-CMqeCyZH.js", ['vue', './__monkey.entry-Cm8GOCEH.js', 'element-plus', 'protobufjs', 'pinia', 'event-source-polyfill'], (function (exports, module) {
+System.register("./BossJobList-zyGg4BW6-BYot4VYk.js", ['vue', './__monkey.entry-OFlFOe8Z.js', 'element-plus', 'protobufjs', 'pinia', 'event-source-polyfill'], (function (exports, module) {
   'use strict';
   var defineComponent, computed, watch, provide, reactive, toRefs, openBlock, createElementBlock, normalizeClass, unref, renderSlot, inject, ref, onMounted, onBeforeUnmount, onUpdated, createVNode, Fragment, useSlots, withCtx, createBlock, resolveDynamicComponent, normalizeStyle, createTextVNode, toDisplayString, createCommentVNode, createElementVNode, TransitionGroup, useAttrs, nextTick, mergeProps, withModifiers, Transition, toHandlers, withDirectives, withKeys, getCurrentInstance, h, vShow, watchEffect, toRef, renderList, shallowRef, createSlots, toRaw, resolveComponent, resolveDirective, vModelText, isRef, pushScopeId, popScopeId, createStaticVNode, createApp, Symbol$1, nodeUtil, Set$1, setToArray, baseRest, baseFlatten, isArrayLikeObject, buildProps, isFunction$1, componentSizes, definePropType, useFormSize, useNamespace, debugWarn, formContextKey, formItemContextKey, throwError, useResizeObserver, useId, refDebounced, addUnit, isBoolean, isString, getProp, withInstall, withNoopInstall, circle_close_default, useSizeProp, useLocale, useFormItem, isArray$1, isEqual, clock_default, calendar_default, onClickOutside, ElTooltip, ElInput, ElIcon, mutable, isNumber, isObject$1, isUndefined, useFormDisabled, isNil, UPDATE_MODEL_EVENT, arrow_down_default, minus_default, arrow_up_default, plus_default, iconPropType, arrow_right_default, more_default, flattedChildren, ClickOutside, useTooltipContentProps, tagProps, Ee, ElTag, ElScrollbar, CHANGE_EVENT, useMutationObserver, d_arrow_left_default, more_filled_default, d_arrow_right_default, arrow_left_default, buttonTypes, question_filled_default, ElButton, warning_filled_default, circle_check_default, check_default, close_default, useFormItemInputId, INPUT_EVENT, loading_default, NOOP, document_default, zoom_in_default, delete_default, isArray, SetCache, useGlobalConfig, _export_sfc$1, isEmpty, EVENT_CODE, addClass, removeClass, hasClass, useTimeoutFn, get, useFocusController, ValidateComponentsMap, isClient, toRawType, debounce, isPromise, isPlainObject$1, entriesOf, useVModel, _export_sfc, isObject, copyArray, getTag$1, isBuffer, cloneBuffer, initCloneObject, Stack, cacheHas, isDate, TinyColor, scrollIntoView, copyObject, keys, keysIn, getSymbols, cloneTypedArray, cloneArrayBuffer, baseUnary, getAllKeys, assignValue, isKorean, stubArray, arrayPush, getPrototype$1, baseGetAllKeys, isObjectLike, baseIteratee, getStyle, PushStatus, LoginStore, pushResultCount, UserStore, logger$1, silentlyLogin, isProdEnv, CircleCloseFilled, Shop, Wallet, PriceTag, Tools, LogRecorder, loginInterceptor, ElMessage, axios, fetchWithGM_request, SSEClient, ElText, ElLink, ElTableColumn, ElTable, ElImage, ElDialog, ElCheckbox, ElButtonGroup, request, toNumber, hyphenate, useGlobalComponentSettings, ElNotification, ElMessageBox;
   return {
