@@ -3653,7 +3653,7 @@ System.register("./__monkey.entry-0iWYCwgZ.js", ['vue', 'protobufjs', 'pinia', '
             return await this.doPush(jobDetail, error.message, retries - 1);
           }
           if (pushResp.data.code === PushResultStatus.FAIL && ((_d = (_c = (_b = (_a2 = pushResp.data) == null ? void 0 : _a2.zpData) == null ? void 0 : _b.bizData) == null ? void 0 : _c.chatRemindDialog) == null ? void 0 : _d.content)) {
-            if ((_h = (_g = (_f = (_e = pushResp.data) == null ? void 0 : _e.zpData) == null ? void 0 : _f.bizData) == null ? void 0 : _g.chatRemindDialog) == null ? void 0 : _h.content.include("您今天已与120位BOSS沟通")) {
+            if ((_h = (_g = (_f = (_e = pushResp.data) == null ? void 0 : _e.zpData) == null ? void 0 : _f.bizData) == null ? void 0 : _g.chatRemindDialog) == null ? void 0 : _h.contents.include("您今天已与120位BOSS沟通")) {
               logger$1.debug(`当天已投递超过120次 工作【${jobTitle}】已修正为投递成功`);
               return {
                 code: PushResultStatus.SUCCESS,
