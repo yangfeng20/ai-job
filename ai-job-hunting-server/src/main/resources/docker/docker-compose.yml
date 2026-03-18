@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  ai-job:
+    container_name: "ai-job"
+    image: "ai-job:1.0"
+    networks:
+      - data_smart_course
+    ports:
+      - "9100:9100"
+      - "6768:6768"
+    volumes:
+      - /app/ai-job/:/app/logs
+    # 会覆盖dockerfile中的cmd命令
+    command: '/app/ai-job.jar --smart.config.webui.port=6768 --smart.config.desc.infer=true'
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+
+
+# 我这里已经存在这个网络了
+networks:
+  data_smart_course:
+    external: true
+
+
+

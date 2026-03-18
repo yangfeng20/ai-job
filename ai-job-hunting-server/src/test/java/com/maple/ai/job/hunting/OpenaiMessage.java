@@ -1,0 +1,37 @@
+package com.maple.ai.job.hunting;
+
+import lombok.Data;
+import org.springframework.ai.chat.messages.Media;
+import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.MessageType;
+
+import java.util.List;
+import java.util.Map;
+
+@Data
+public class OpenaiMessage implements Message {
+
+    private String role;
+
+    private String content;
+
+    public OpenaiMessage(MessageType messageType, String content) {
+        this.role = messageType.getValue();
+        this.content = content;
+    }
+
+    @Override
+    public List<Media> getMedia() {
+        return List.of();
+    }
+
+    @Override
+    public Map<String, Object> getProperties() {
+        return Map.of();
+    }
+
+    @Override
+    public MessageType getMessageType() {
+        return MessageType.fromValue(role);
+    }
+}

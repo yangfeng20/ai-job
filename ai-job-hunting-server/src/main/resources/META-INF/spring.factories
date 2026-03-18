@@ -1,0 +1,1 @@
+com.maple.smart.config.core.listener.ConfigListener=com.maple.ai.job.hunting.config.ai.OpenAIPoolConfig.OpenAIPoolManager
