@@ -14,6 +14,8 @@ services:
     # 会覆盖dockerfile中的cmd命令
     command: '/app/ai-job.jar --smart.config.webui.port=6768 --smart.config.desc.infer=true'
     privileged: true
+
+    # 如果使用docker部署，并使用默认properties文件，请指定mysql.host环境变量
     environment:
       - TZ=Asia/Shanghai
 
