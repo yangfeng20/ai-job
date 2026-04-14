@@ -1,3 +1,13 @@
+> [!CAUTION]
+> [灵感回路 idealoop.top](https://idealoop.top)
+>
+> 灵感回路💡: 一个面向 AI 时代独立开发者、创业者与副业探索者的 Idea 发现、评估与讨论社区。
+
+<br/>
+
+---
+
+
 # 🎉 AI 工作猎手 (AI Job Hunting) - 正式开源！
 
 **找工作，用 AI 工作猎手！让 AI 成为您的求职分身，24/7 在线助您斩获 Offer。**
