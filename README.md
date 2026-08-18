@@ -3,6 +3,11 @@
 >
 > 灵感回路💡: 一个面向 AI 时代独立开发者、创业者与副业探索者的 Idea 发现、评估与讨论社区。
 
+> [!TIP]
+> **投出去只是上半场, 面试才是决定 Offer 的下半场。**
+>
+> [beacon 灯塔](https://github.com/yangfeng20/beacon): 同作者的开源 AI 面试助手, Windows 桌面端下载即用。面试全程记录 + 自动复盘报告 + 拿你自己的简历做模拟面试。
+
 <br/>
 
 ---
@@ -132,3 +137,27 @@
 - 新增ai招呼语功能。
 - 产品支持试用。
 - 页面优化。
+
+
+---
+
+## 🔗 相关项目
+
+### beacon 灯塔 - 让每一场面试, 都变成下一场的准备
+
+> 面试完当天还记得七七八八, 三天后只剩一句「好像问了个分布式锁」。
+
+AI 工作猎手负责把你送进面试间, [**beacon 灯塔**](https://github.com/yangfeng20/beacon) 负责让你从面试间里带走点东西:
+
+- **全程记录**: 面试对话实时转写, 结束后自动生成复盘报告, 不再靠印象复盘
+- **模拟面试**: 拿你自己的简历和项目练, 而不是背通用题库
+- **简历素材整理**: 让 AI 读一遍你的代码仓库, 把三年前那个只剩一句「负责订单模块」的项目还原成能写进简历的细节
+- **数据在自己手里**: 开源, 面试录音留在本地, 简历和录音不用交给不知底细的服务
+
+Windows 桌面应用, [下载即用](https://github.com/yangfeng20/beacon#下载), 不需要部署服务端。
+
+[![beacon 复盘报告](https://raw.githubusercontent.com/yangfeng20/beacon/main/images/review-report.png)](https://github.com/yangfeng20/beacon)
+
+### 灵感回路
+
+面向 AI 时代独立开发者、创业者与副业探索者的 Idea 发现、评估与讨论社区: [idealoop.top](https://idealoop.top)
