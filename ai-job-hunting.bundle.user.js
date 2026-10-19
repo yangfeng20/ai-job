@@ -80509,7 +80509,7 @@ usage: app.provide(ZINDEX_INJECTION_KEY, { current: 0 })`);
               if (count >= 3) {
                 clearInterval(interval);
                 logger$1.error(0, "获取平台挂载元素失败");
-                return document.createElement("div");
+                return resolve(null);
               }
               count++;
             }, 300);
@@ -83289,26 +83289,23 @@ usage: app.provide(ZINDEX_INJECTION_KEY, { current: 0 })`);
       const rootApp = document.createElement("div");
       rootApp.id = "ai-job";
       rootApp.classList.add("page-job-content");
-      window.onload = () => {
-        app.mount(
-          (() => {
-            platform.getMountEle().then((elP) => {
-              let containerEle = elP.el;
-              let p2 = elP.p;
-              if (p2 === "end") {
-                containerEle.appendChild(rootApp);
-              } else {
-                containerEle.insertBefore(
-                  rootApp,
-                  containerEle.firstElementChild
-                );
-              }
-            });
-            return rootApp;
-          })()
-        );
+      app.mount(rootApp);
+      let attaching = false;
+      const attach = async () => {
+        if (rootApp.isConnected || attaching) return;
+        attaching = true;
+        try {
+          const elP = await platform.getMountEle();
+          if (!elP || !elP.el || rootApp.isConnected) return;
+          if (elP.p === "end") elP.el.appendChild(rootApp);
+          else elP.el.insertBefore(rootApp, elP.el.firstElementChild);
+          logger$1.info("AI面板已挂载");
+        } finally {
+          attaching = false;
+        }
       };
-
+      attach();
+      setInterval(attach, 1500);
     })
   };
 }));
